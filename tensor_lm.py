@@ -1,7 +1,6 @@
 #  https://www.tensorflow.org/get_started/get_started
 
 import tensorflow as tf
-# NumPy is often used to load, manipulate and preprocess data.
 import numpy as np
 
 def train():
