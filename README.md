@@ -17,3 +17,4 @@ Found it at [Data Flow Graphs Intro](http://web.cecs.pdx.edu/~mperkows/temp/JULY
 File tensor_lm.py demonstrates how to train(or fit) [linear model](https://en.wikipedia.org/wiki/Linear_model),
 codes are extract from tensorflow's tutorial.
 
+
