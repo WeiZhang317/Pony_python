@@ -257,11 +257,11 @@ if __name__ == "__main__":
 
         print tf_cor_run([1, 2, 3, 4, 5], [6, 7, 8, 9, 10], sess)
         f, data = tf_cor_run([1, 2, 3, 4, 5], [6, 7, 8, 9, 10])
-        print sess.run(tf_cor_run(f, data))
+        print sess.run(f, data)
 
     print "cor_matrix sample"
     with tf.Session() as sess:
 
         print tf_cor_matrix_run([[1, 3, 9], [8, 0, 1],[2, 1, 3], [5, 9, 0]], sess)
         f, data = tf_cor_matrix_run([[1, 3, 9], [8, 0, 1],[2, 1, 3], [5, 9, 0]])
-        print sess.run(tf_cor_matrix_run(f, data))
+        print sess.run(f, data)
