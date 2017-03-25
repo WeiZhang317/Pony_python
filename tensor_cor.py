@@ -2,7 +2,7 @@ import tensorflow as tf
 
 
 def tf_var(x):
-    """Take `x` as input tensor, produce the tesor used to calculate Variance.
+    """Take `x` as input tensor, produce the tensor used to calculate Variance.
     
     For example:
     ```python
@@ -32,7 +32,7 @@ def tf_var_run(data,sess=None):
 
     :param data: number array
     :param sess: TensorFlow session
-    :return: Variance if sess is provided, tensor need for calculating the Variance otherwise.
+    :return: Variance if sess is provided, a tensor used for calculating the Variance otherwise.
     """
     # todo check parameter
     x = tf.placeholder(tf.float32)
@@ -40,7 +40,19 @@ def tf_var_run(data,sess=None):
     if not sess : return (f, {x: data})
     return sess.run(f, {x: data})
 
+
 def tf_cov(x, y):
+    """Take `x`,`y` as input tensor, produce the tensor used to calculate Covariance.
+    
+    For example:
+    ```python
+    x = tf.placeholder(tf.float32)
+    f = tf_cov(x, y)
+    
+    :param x: input tensor
+    :param y: input tensor
+    :return: A `Tensor` that used to calculate Covariance.
+    """
     n = tf.to_float(tf.size(x))
     x = x - tf.reduce_mean(x)
     y = y - tf.reduce_mean(y)
@@ -49,6 +61,20 @@ def tf_cov(x, y):
 
 
 def tf_cov_run(dataX, dataY,sess=None):
+    """Calculate Covariance of `dataX` and `dataY`.
+    Return Covariance if sess is provided, return a tensor used for calculating the Covariance.
+    
+    For example:
+    ```python
+    with tf.Session() as sess:
+        print tf_cov_run([1, 2, 3, 4, 5], [6, 7, 8, 9, 10], sess)
+        print sess.run(tf_cov_run([1, 2, 3, 4, 5], [6, 7, 8, 9, 10]))
+    ```
+    :param dataX: number array
+    :param dataY: number array
+    :param sess: TensorFlow Session
+    :return: Covariance if sess is provided, a tensor used for calculating the Covariance otherwise.
+    """
     # todo check parameter
     x = tf.placeholder(tf.float32)
     y = tf.placeholder(tf.float32)
@@ -143,10 +169,10 @@ if __name__ == "___main__":
     print tf_cor_matrix_run(data,sess)
     # todo use compensated summation(Kahan summation algorithm) to get more accuracy
 
+    with tf.Session() as sess:
+        print tf_var_run([1, 2, 3, 4, 5],sess)
+        print sess.run(tf_var_run([1, 2, 3, 4, 5]))
 
-
-
-
-
-
-
+    with tf.Session() as sess:
+        print tf_cov_run([1, 2, 3, 4, 5], [6, 7, 8, 9, 10], sess)
+        print sess.run(tf_cov_run([1, 2, 3, 4, 5], [6, 7, 8, 9, 10]))
