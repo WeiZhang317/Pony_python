@@ -2,6 +2,17 @@ import tensorflow as tf
 
 
 def tf_var(x):
+    """Take `x` as input tensor, produce the tesor used to calculate Variance.
+    
+    For example:
+    ```python
+    x = tf.placeholder(tf.float32)
+    f = tf_var(x)
+    ```
+
+    :param x: Input tensor 
+    :return: A `Tensor` that used to calculate Variance.
+    """
     x = x - tf.reduce_mean(x)
     n = tf.to_float(tf.size(x))
     var = tf.reduce_sum(x * x) / (n - 1)
@@ -9,6 +20,20 @@ def tf_var(x):
 
 
 def tf_var_run(data,sess=None):
+    """Calculate Variance of `data`.
+    Return Variance if sess is provided, return tensor need for calculating the Variance.
+    
+    For example:
+    ```python
+    with tf.Session() as sess:
+        print tf_var_run([1, 2, 3, 4, 5],sess)
+        print sess.run(tf_var_run([1, 2, 3, 4, 5]))
+    ```
+
+    :param data: number array
+    :param sess: TensorFlow session
+    :return: Variance if sess is provided, tensor need for calculating the Variance otherwise.
+    """
     # todo check parameter
     x = tf.placeholder(tf.float32)
     f = tf_var(x)
@@ -96,7 +121,7 @@ def tf_cor_matrix_run(data,sess=None):
     return sess.run(f, {x: data})
 
 
-if __name__ == "__main__":
+if __name__ == "___main__":
     sess = tf.Session()
 
     print tf_var_run([1, 2, 3, 4, 5],sess)
