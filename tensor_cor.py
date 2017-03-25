@@ -42,7 +42,7 @@ def tf_var_run(data,sess=None):
 
 
 def tf_cov(x, y):
-    """Take `x`,`y` as input tensor, produce the tensor used to calculate Covariance.
+    """Take variables `x`,`y` as input tensor, produce the tensor used to calculate Covariance.
     
     For example:
     ```python
@@ -61,8 +61,8 @@ def tf_cov(x, y):
 
 
 def tf_cov_run(dataX, dataY,sess=None):
-    """Calculate Covariance of `dataX` and `dataY`.
-    Return Covariance if sess is provided, return a tensor used for calculating the Covariance.
+    """Calculate Covariance between `dataX` and `dataY`.
+    Return Covariance if sess is provided, return a tensor used for calculating the Covariance between `dataX` and `dataY`.
     
     For example:
     ```python
@@ -84,7 +84,21 @@ def tf_cov_run(dataX, dataY,sess=None):
 
 
 def tf_cor(x, y):
-    # pearson
+    # Pearson product-moment correlation coefficient.
+
+    """Take variables `x` and `y` as input tensor,
+    produce the tensor used to calculate pearson correlation coefficient between two variables `x` and `y`.
+    
+    For example:
+    ```python
+    x = tf.placeholder(tf.float32)
+    f = tf_cov(x, y)
+    ```
+    
+    :param x: input tensor
+    :param y: input tensor
+    :return: A `Tensor` that used to calculate Pearson correlation coefficient.
+    """
     n = tf.to_float(tf.size(x))
     x = x - tf.reduce_mean(x)
     y = y - tf.reduce_mean(y)
@@ -100,7 +114,25 @@ def tf_cor(x, y):
     return cor
 
 def tf_cor_run(dataX, dataY,sess=None):
-    # pearson
+    # Pearson product-moment correlation coefficient.
+
+    """Calculate Pearson correlation coefficient between `dataX` and `dataY`.
+    Return Pearson correlation coefficient if sess is provided, 
+    return a tensor used for calculating the Pearson correlation coefficient between `dataX` and `dataY`.
+    
+    For example:
+    ```python
+    with tf.Session() as sess:
+        print tf_cor_run([1, 2, 3, 4, 5], [6, 7, 8, 9, 10], sess)
+        print sess.run(tf_cor_run([1, 2, 3, 4, 5], [6, 7, 8, 9, 10]))
+    ```
+    
+    :param dataX: number array
+    :param dataY: number array
+    :param sess: TensorFlow Session
+    :return: Pearson correlation coefficient if sess is provided, 
+    a tensor used for calculating the Pearson correlation coefficient between `dataX` and `dataY` otherwise.
+    """
     # todo check parameter
     x = tf.placeholder(tf.float32)
     y = tf.placeholder(tf.float32)
