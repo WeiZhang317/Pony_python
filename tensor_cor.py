@@ -1,3 +1,11 @@
+# copyright (c) 2017 Wei Zhang
+#
+# You can redistribute it and/or modify it under the terms of the
+# GNU General Public License Version 2. You should have received a copy of the
+# GNU General Public License Version 2 along with pony_python project.
+# If not, you can get one at https://github.com/WeiZhang317/pony_python
+
+
 import tensorflow as tf
 
 

@@ -1,4 +1,5 @@
-#  https://www.tensorflow.org/get_started/get_started
+
+# https://www.tensorflow.org/get_started/get_started
 
 import tensorflow as tf
 import numpy as np
