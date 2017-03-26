@@ -4,6 +4,7 @@ import tensorflow as tf
 import numpy as np
 
 def train():
+
     sess = tf.Session()
     W = tf.Variable([.3], tf.float32)
     b = tf.Variable([-.3], tf.float32)
@@ -16,18 +17,21 @@ def train():
     print(sess.run(linear_model, {x:[1,2,3,4]}))
     print(sess.run(W))
     print(sess.run(b))
+    print "-------------------"
 
     y = tf.placeholder(tf.float32)
     squared_deltas = tf.square(linear_model - y)
     loss = tf.reduce_sum(squared_deltas)
 
     print(sess.run(loss, {x:[1,2,3,4], y:[0,-1,-2,-3]}))
+    print "-------------------"
 
     # we want loss to be 0
     fixW = tf.assign(W, [-1.])
     fixb = tf.assign(b, [1.])
     sess.run([fixW, fixb])
     print(sess.run(loss, {x:[1,2,3,4], y:[0,-1,-2,-3]}))
+    print "-------------------"
 
     optimizer = tf.train.GradientDescentOptimizer(0.01)
     train = optimizer.minimize(loss)
@@ -45,10 +49,9 @@ def train():
     # evaluate training accuracy
     curr_W, curr_b, curr_loss  = sess.run([W, b, loss], {x:x_train, y:y_train})
     print("W: %s b: %s loss: %s"%(curr_W, curr_b, curr_loss))
+    print "-------------------"
 
 def learn():
-
-
 
     # Declare list of features. We only have one real-valued feature. There are many
     # other types of columns that are more complicated and useful.
@@ -89,6 +92,7 @@ def learn():
     print(estimator.evaluate(input_fn=input_fn))
 
 def custom():
+
     # Declare list of features, we only have one real-valued feature
     def model(features, labels, mode):
         # Build a linear model and predict values
@@ -123,7 +127,7 @@ def custom():
 
 
 if __name__ == "__main__":
-    learn()
+    train()
 
 
 
